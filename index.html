@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>PowerShell Notes</title>
-  <!-- This makes it look professional and clean -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme: Simple and Clean -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 <body>
-  <div id="app">Loading...</div>
+  <div id="app">Please wait, loading notes...</div>
   <script>
     window.$docsify = {
-      name: 'My PowerShell Notes',
-      loadSidebar: true, // This tells the engine to look for _sidebar.md
-      subMaxLevel: 2    // This puts your ## headers into the sidebar automatically
+      name: 'PowerShell Notes',
+      repo: '',
+      loadSidebar: true, // Look for _sidebar.md
+      subMaxLevel: 2,    // Show ## headings in sidebar
+      auto2top: true,    // Scroll to top when changing pages
     }
   </script>
-  <!-- The "Brain" of your site -->
-  <script src="//cdn.npm.com/docsify@4"></script>
-  <!-- This adds the blue/purple colors to your PowerShell code -->
-  <script src="//cdn.npm.com/prismjs@1/components/prism-powershell.min.js"></script>
+  <!-- Main Docsify Script -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- PowerShell Syntax Highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
 </body>
 </html>
