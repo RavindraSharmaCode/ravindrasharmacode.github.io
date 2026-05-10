@@ -4,33 +4,25 @@
   <meta charset="UTF-8">
   <title>PowerShell Notes</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  
   <style>
-    /* THE BRUTE FORCE WATERMARK KILLER */
-    /* This targets every possible way that 'powershell' text is injected */
-    pre[data-lang]::before, 
-    pre[data-lang]::after,
-    .markdown-section pre::before,
-    .markdown-section pre::after,
-    code[class*="language-"]::before,
-    code[class*="language-"]::after {
-      display: none !important;
+    /* 1. HIDE THE WATERMARK VIA CSS */
+    pre[data-lang]::before {
       content: none !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
+      display: none !important;
     }
 
-    /* Keep the Copy Button visible and pretty */
+    /* 2. STYLE THE COPY BUTTON */
     .docsify-copy-code-button {
       opacity: 1 !important;
       background: #42b983 !important;
-      color: #fff !important;
+      color: white !important;
       border-radius: 4px !important;
-      padding: 5px 10px !important;
+      padding: 6px 10px !important;
     }
 
+    /* 3. ENSURE CONTENT DOESN'T OVERLAP */
     .markdown-section pre {
-        padding-top: 2.5em !important;
+      padding-top: 2.5em !important;
     }
   </style>
 </head>
@@ -42,26 +34,31 @@
       loadSidebar: true,
       subMaxLevel: 2,
       homepage: 'README.md',
+      // Enable Search
+      search: 'auto',
       copyCode: {
         buttonText : 'Copy',
         successText: 'Copied'
       }
     }
   </script>
-  
+
+  <!-- Docsify v4 -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
 
-  <!-- JavaScript Fallback to remove watermark if CSS fails -->
+  <!-- SCRIPT TO REMOVE WATERMARK MANUALLY -->
   <script>
-    document.addEventListener('click', function() {
-        // Every time you click (navigate), we strip the labels
-        setTimeout(() => {
-            document.querySelectorAll('pre').forEach(pre => {
-                pre.setAttribute('data-lang', '');
-            });
-        }, 500);
+    // This removes the 'data-lang' attribute from all code blocks 
+    // after Docsify finishes rendering the page.
+    hook.doneEach(function() {
+      document.querySelectorAll('pre').forEach(function(el) {
+        el.setAttribute('data-lang', '');
+      });
     });
   </script>
 </body>
