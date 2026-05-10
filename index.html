@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>PowerShell Notes</title>
+  <!-- This makes it look professional and clean -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 <body>
   <div id="app">Loading...</div>
   <script>
     window.$docsify = {
-      name: 'PowerShell Notes',
-      repo: 'https://github.com/roboticscript/roboticscript.github.io',
-      loadSidebar: true, // This enables your sidebar
-      subMaxLevel: 2    // Automatically shows headers (##) in the sidebar
+      name: 'My PowerShell Notes',
+      loadSidebar: true, // This tells the engine to look for _sidebar.md
+      subMaxLevel: 2    // This puts your ## headers into the sidebar automatically
     }
   </script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <!-- Optional: Syntax Highlighting for PowerShell -->
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
+  <!-- The "Brain" of your site -->
+  <script src="//cdn.npm.com/docsify@4"></script>
+  <!-- This adds the blue/purple colors to your PowerShell code -->
+  <script src="//cdn.npm.com/prismjs@1/components/prism-powershell.min.js"></script>
 </body>
 </html>
