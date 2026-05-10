@@ -6,31 +6,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   
   <style>
-    /* 1. COMPLETELY HIDE THE LANGUAGE WATERMARK */
-    /* This targets the common selectors for the language label */
-    .markdown-section pre > code::before,
-    .markdown-section pre::before,
-    code[class*="language-"]::before,
-    [data-lang]::before {
-      content: none !important;
+    /* 1. THE WATERMARK KILLER */
+    /* This targets the exact attribute Docsify uses to display 'powershell' */
+    section.content pre[data-lang]::before {
+      content: "" !important;
       display: none !important;
     }
 
-    /* 2. MAKE THE COPY BUTTON ALWAYS VISIBLE */
-    /* By default, it only shows on hover. This makes it stay visible. */
+    /* 2. BUTTON STYLING */
     .docsify-copy-code-button {
-      opacity: 1 !important;
-      background: #eeeeee !important;
-      padding: 5px 8px !important;
-      border: 1px solid #ccc !important;
+      opacity: 1 !important; /* Always visible */
+      background: #42b983 !important; /* Nice green to match Vue theme */
+      color: white !important;
+      border: none !important;
       border-radius: 4px !important;
-      color: #333 !important;
+      padding: 6px 10px !important;
+      font-weight: bold !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    /* Position adjustment to ensure it doesn't overlap text */
+    /* 3. LAYOUT FIX */
     .markdown-section pre {
-      position: relative;
-      padding-top: 30px !important;
+      padding-top: 2.5em !important; /* Space for the button */
     }
   </style>
 </head>
@@ -41,16 +38,23 @@
       name: 'PowerShell Notes',
       loadSidebar: true,
       subMaxLevel: 2,
+      // Search Plugin Settings
+      search: 'auto', 
       copyCode: {
         buttonText : 'Copy',
-        errorText  : 'Error',
         successText: 'Copied'
       }
     }
   </script>
   
+  <!-- Required Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  
+  <!-- Syntax Highlighting -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
 </body>
 </html>
