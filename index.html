@@ -5,42 +5,51 @@
   <title>PowerShell Notes</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
-    /* 1. HIDE THE WATERMARK TEXT (The 'powershell' label) */
-    /* This targets the exact element seen in your screenshot */
-    pre[data-lang]::before {
+    /* 1. HIDE THE WATERMARK */
+    /* This targets every possible way that 'powershell' text is shown */
+    .markdown-section pre::before,
+    .markdown-section pre::after,
+    [data-lang]::before,
+    [data-lang]::after {
       content: none !important;
       display: none !important;
+      visibility: hidden !important;
     }
 
-    /* 2. REMOVE THE EXTRA TOP SPACE */
+    /* 2. REMOVE EXTRA TOP SPACE */
     .markdown-section pre {
-      padding: 0 !important; /* Removes the container padding */
+      padding: 0 !important;
       margin: 1.2em 0 !important;
       position: relative !important;
       background: #f8f8f8 !important;
+      overflow: hidden !important; /* Clips any ghost elements */
     }
 
     .markdown-section pre > code {
-      padding: 15px !important; /* Standard padding inside the box */
-      padding-top: 15px !important; /* Ensures no gap at the top */
+      padding: 15px !important;
+      padding-top: 15px !important; /* Code starts at the very top */
       display: block !important;
     }
 
-    /* 3. POSITION THE COPY BUTTON CLEANLY */
+    /* 3. SOLID COPY BUTTON (Covers anything behind it) */
     .docsify-copy-code-button {
       opacity: 1 !important;
-      background: #42b983 !important;
-      color: #fff !important;
-      border-radius: 0 4px 0 4px !important; /* Matches the top right corner */
-      padding: 5px 10px !important;
-      z-index: 10 !important;
+      background: #42b983 !important; /* Vue Green */
+      color: #ffffff !important;
+      padding: 6px 12px !important;
+      border-radius: 0 0 0 6px !important; /* Rounded only on bottom-left */
+      z-index: 999 !important;
       border: none !important;
+      font-weight: bold !important;
+      top: 0 !important;   /* Aligns to the absolute top */
+      right: 0 !important; /* Aligns to the absolute right */
     }
 
-    /* 4. SEARCH BAR FIX */
+    /* 4. SEARCH BAR */
     .search input {
       border: 1px solid #ddd !important;
       margin: 10px 0;
+      padding: 5px;
     }
   </style>
 </head>
