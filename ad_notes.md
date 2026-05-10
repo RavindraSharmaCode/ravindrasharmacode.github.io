@@ -1,6 +1,5 @@
-# Active Directory
-Get a list of all users:
+# AD Management
+Here is how to unlock a user:
 
 ```powershell
-Get-ADUser -Filter * | Select-Object Name
-```
+Unlock-ADAccount -Identity "username"
