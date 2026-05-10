@@ -5,35 +5,46 @@
   <title>PowerShell Notes</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
-    /* 1. REMOVE WATERMARK & REDUCE SPACE */
-    /* Target the exact selector Docsify uses for the 'powershell' label */
-    .markdown-section pre[data-lang]::before {
-      content: none !important; /* Kills the text */
-      display: none !important; /* Removes the element */
+    /* 1. THE ULTIMATE WATERMARK KILLER */
+    /* This targets the specific labels created by Docsify and the Copy plugin */
+    .markdown-section pre::before,
+    .markdown-section pre::after,
+    .markdown-section code::before,
+    .markdown-section code::after {
+      content: none !important;
+      display: none !important;
     }
 
-    /* Remove the extra padding at the top of code boxes */
+    /* 2. REMOVE EXTRA SPACE & RE-ALIGN CODE BOX */
     .markdown-section pre {
-      padding: 1.2em !important; /* Standard even padding */
-      margin: 1.2em 0 !important;
-      position: relative;
+      padding: 0 !important; /* Removes internal padding */
+      margin: 1.5em 0 !important;
+      background-color: #f8f8f8 !important;
+      overflow: visible !important; /* Ensures copy button isn't cut off */
     }
 
-    /* 2. STYLE THE COPY BUTTON */
+    .markdown-section pre > code {
+      padding: 15px !important; /* Sets a clean, uniform space inside the box */
+      display: block;
+    }
+
+    /* 3. STYLE THE COPY BUTTON (Positioned correctly with no overlap) */
     .docsify-copy-code-button {
       background: #42b983 !important;
-      color: white !important;
-      border: none !important;
+      color: #fff !important;
       border-radius: 4px !important;
-      padding: 4px 8px !important;
       font-weight: bold !important;
-      opacity: 1 !important; /* Make it always visible */
+      padding: 5px 8px !important;
+      outline: none !important;
     }
 
-    /* 3. FIX SEARCH BAR VISIBILITY */
+    /* 4. SEARCH BAR FIX */
+    .search {
+      padding: 10px;
+    }
     .search input {
-      background-color: #f3f3f3 !important;
-      border-radius: 5px !important;
+      border-radius: 20px !important;
+      background: #f3f3f3 !important;
     }
   </style>
 </head>
@@ -44,13 +55,8 @@
       name: 'PowerShell Notes',
       loadSidebar: true,
       subMaxLevel: 2,
-      // Search Plugin Config
-      search: {
-        placeholder: 'Search...',
-        noData: 'No results!',
-        depth: 6
-      },
-      // Copy Code Config
+      // Search configuration
+      search: 'auto',
       copyCode: {
         buttonText: 'Copy',
         successText: 'Copied'
@@ -58,26 +64,18 @@
     }
   </script>
 
-  <!-- Essential Scripts -->
+  <!-- Scripts in correct order -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
-  
-  <!-- Search Plugin (Must be after docsify.js) -->
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  
-  <!-- Copy Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  
-  <!-- Language Support -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
 
-  <!-- Final Watermark Purge -->
+  <!-- This script forcibly wipes the 'data-lang' attribute after rendering -->
   <script>
-    // This script runs every time a page is loaded to manually strip the lang attribute
     window.$docsify.plugins = [].concat(function(hook) {
       hook.doneEach(function() {
-        var codes = document.querySelectorAll('pre');
-        codes.forEach(function(code) {
-          code.setAttribute('data-lang', ''); // Effectively deletes the watermark source
+        document.querySelectorAll('pre').forEach(el => {
+          el.removeAttribute('data-lang');
         });
       });
     }, window.$docsify.plugins);
