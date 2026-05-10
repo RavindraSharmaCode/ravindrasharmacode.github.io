@@ -3,53 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <title>PowerShell Notes</title>
+  <!-- Using the standard theme -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  
   <style>
-    /* 1. HIDE ALL LABELS (Watermarks) */
-    /* Target the exact data attributes that create the 'powershell' text */
-    [data-lang]::before, 
-    [data-lang]::after,
-    pre::before, 
-    pre::after {
-      content: "" !important;
+    /* 1. THE WATERMARK KILLER */
+    /* This targets the 'powershell' text and shrinks its container to zero */
+    pre[data-lang]::before {
+      content: none !important;
       display: none !important;
       height: 0 !important;
-      width: 0 !important;
-      position: absolute !important;
+      padding: 0 !important;
+      margin: 0 !important;
     }
 
-    /* 2. REMOVE THE EXTRA TOP SPACE */
+    /* 2. FIX THE GAPS */
     .markdown-section pre {
-      padding: 0 !important; 
+      padding: 0 !important;
       margin: 1.2em 0 !important;
-      position: relative !important;
-      background: #fdfdfd !important;
-      border-radius: 5px;
     }
 
-    /* This targets the actual text inside to give it a clean 15px border */
+    /* This creates the clean, even space inside the box */
     .markdown-section pre > code {
       padding: 15px !important; 
       display: block !important;
-      line-height: 1.5 !important;
-      margin-top: 0 !important; /* Forces code to the very top */
+      position: relative;
     }
 
-    /* 3. STYLE THE COPY BUTTON */
+    /* 3. SEARCH BAR VISIBILITY */
+    /* Forces the search input to have a border so you can see it */
+    .search input {
+      border: 1px solid #ddd !important;
+      margin: 10px 0;
+    }
+
+    /* 4. COPY BUTTON POSITION */
     .docsify-copy-code-button {
       background: #42b983 !important;
-      color: #fff !important;
-      border-radius: 0 4px 0 4px !important; /* Curves the corner */
-      padding: 5px 10px !important;
-      opacity: 1 !important; /* Always visible */
-    }
-
-    /* 4. SEARCH BAR FIX */
-    .search input {
-      background: #f3f3f3 !important;
-      border: 1px solid #ddd !important;
-      padding: 7px !important;
-      margin-top: 10px;
+      color: white !important;
+      border-radius: 4px !important;
+      padding: 4px 8px !important;
     }
   </style>
 </head>
@@ -60,8 +53,12 @@
       name: 'PowerShell Notes',
       loadSidebar: true,
       subMaxLevel: 2,
-      homepage: 'README.md',
-      search: 'auto', // Enables the Search bar
+      // Fixed Search Config
+      search: {
+        placeholder: 'Search notes...',
+        noData: 'No results',
+        depth: 6
+      },
       copyCode: {
         buttonText : 'Copy',
         successText: 'Copied'
@@ -69,22 +66,10 @@
     }
   </script>
 
-  <!-- Load Scripts in the exact required order -->
+  <!-- Script order is critical for the Search Bar to show up -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
-
-  <!-- FINAL ATTEMPT AT DELETING THE WATERMARK VIA JAVASCRIPT -->
-  <script>
-    window.$docsify.plugins = [].concat(function(hook) {
-      hook.doneEach(function() {
-        // Find every code block and strip the attribute that creates the watermark
-        document.querySelectorAll('pre').forEach(function(el) {
-          el.removeAttribute('data-lang');
-        });
-      });
-    }, window.$docsify.plugins);
-  </script>
 </body>
 </html>
