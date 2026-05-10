@@ -5,45 +5,42 @@
   <title>PowerShell Notes</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
-    /* 1. THE ULTIMATE WATERMARK KILLER */
-    /* Target both Docsify's label AND the Copy Plugin's label */
-    .markdown-section pre[data-lang]::before,
-    .docsify-copy-code-button::after {
+    /* 1. HIDE THE WATERMARK TEXT (The 'powershell' label) */
+    /* This targets the exact element seen in your screenshot */
+    pre[data-lang]::before {
       content: none !important;
       display: none !important;
-      visibility: hidden !important;
     }
 
-    /* 2. REMOVE EXTRA TOP SPACE */
+    /* 2. REMOVE THE EXTRA TOP SPACE */
     .markdown-section pre {
-      padding: 0 !important;
+      padding: 0 !important; /* Removes the container padding */
       margin: 1.2em 0 !important;
       position: relative !important;
       background: #f8f8f8 !important;
     }
 
     .markdown-section pre > code {
-      padding: 15px !important;
+      padding: 15px !important; /* Standard padding inside the box */
+      padding-top: 15px !important; /* Ensures no gap at the top */
       display: block !important;
     }
 
-    /* 3. STYLE ONLY THE COPY ICON/TEXT */
+    /* 3. POSITION THE COPY BUTTON CLEANLY */
     .docsify-copy-code-button {
       opacity: 1 !important;
       background: #42b983 !important;
       color: #fff !important;
-      padding: 4px 8px !important;
-      border-radius: 4px !important;
-      font-size: 12px !important;
+      border-radius: 0 4px 0 4px !important; /* Matches the top right corner */
+      padding: 5px 10px !important;
       z-index: 10 !important;
       border: none !important;
     }
 
-    /* 4. SEARCH BAR */
+    /* 4. SEARCH BAR FIX */
     .search input {
       border: 1px solid #ddd !important;
       margin: 10px 0;
-      padding: 5px;
     }
   </style>
 </head>
