@@ -12,14 +12,22 @@
       name: 'PowerShell Notes',
       loadSidebar: true,
       subMaxLevel: 2,
-      // FIX 1: Explicitly tell Docsify to use README.md as the home
-      homepage: 'README.md', 
-      // FIX 2: Ensure it looks in the correct folder on GitHub
-      basePath: './',
-      relativePath: true
+      // Settings for the copy button
+      copyCode: {
+        buttonText : 'Copy',
+        errorText  : 'Error',
+        successText: 'Copied'
+      }
     }
   </script>
+  
+  <!-- Required Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- The Copy Button Plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  
+  <!-- PowerShell Language Support -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
 </body>
 </html>
