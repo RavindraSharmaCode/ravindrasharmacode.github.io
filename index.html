@@ -6,18 +6,31 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   
   <style>
-    /* This hides the "powershell" watermark text */
-    code[class*="language-"]::before {
+    /* 1. COMPLETELY HIDE THE LANGUAGE WATERMARK */
+    /* This targets the common selectors for the language label */
+    .markdown-section pre > code::before,
+    .markdown-section pre::before,
+    code[class*="language-"]::before,
+    [data-lang]::before {
+      content: none !important;
       display: none !important;
     }
 
-    /* This makes the copy button look cleaner */
+    /* 2. MAKE THE COPY BUTTON ALWAYS VISIBLE */
+    /* By default, it only shows on hover. This makes it stay visible. */
     .docsify-copy-code-button {
-      background: #f8f8f8 !important;
-      color: #333 !important;
-      font-size: 0.8rem !important;
-      border: 1px solid #ddd !important;
+      opacity: 1 !important;
+      background: #eeeeee !important;
+      padding: 5px 8px !important;
+      border: 1px solid #ccc !important;
       border-radius: 4px !important;
+      color: #333 !important;
+    }
+
+    /* Position adjustment to ensure it doesn't overlap text */
+    .markdown-section pre {
+      position: relative;
+      padding-top: 30px !important;
     }
   </style>
 </head>
@@ -29,20 +42,15 @@
       loadSidebar: true,
       subMaxLevel: 2,
       copyCode: {
-        buttonText : 'Copy', // Change to '' if you want ONLY an icon (requires FontAwesome)
+        buttonText : 'Copy',
         errorText  : 'Error',
         successText: 'Copied'
       }
     }
   </script>
   
-  <!-- Required Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
-  
-  <!-- Copy Button Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  
-  <!-- PowerShell Language Support -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
 </body>
 </html>
