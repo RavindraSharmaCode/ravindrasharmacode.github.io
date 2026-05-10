@@ -1,69 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>PowerShell Notes</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-
   <style>
-    /* 1. KILL WATERMARK & EXTRA SPACE */
-    .markdown-section pre[data-lang]::before {
-      display: none !important;
+    /* 1. HIDE WATERMARK */
+    /* This removes the 'powershell' text without breaking the plugin */
+    pre[data-lang]::before {
       content: none !important;
     }
 
-    /* 2. CODE BOX BOX STYLING */
+    /* 2. REMOVE EXTRA SPACE */
     .markdown-section pre {
       padding: 0 !important;
-      margin: 1.2em 0 !important;
       position: relative !important;
-      background-color: #f8f8f8 !important;
-      border: 1px solid #eee;
-      border-radius: 4px;
-      overflow: visible !important; /* Crucial so button isn't hidden */
     }
-
     .markdown-section pre > code {
       padding: 15px !important;
-      padding-top: 20px !important; /* Give the button a little breathing room */
       display: block !important;
-      line-height: 1.5;
     }
 
-    /* 3. THE COPY BUTTON - FORCED STYLE */
-    /* We target the button class directly with extreme priority */
+    /* 3. ENSURE COPY BUTTON IS VISIBLE */
     .docsify-copy-code-button {
-      position: absolute !important;
-      top: 4px !important;
-      right: 4px !important;
-      display: block !important;
-      opacity: 1 !important; /* Force visibility */
+      opacity: 1 !important;
       background: #42b983 !important;
       color: #fff !important;
-      padding: 4px 10px !important;
-      border-radius: 3px !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      z-index: 999 !important;
-      cursor: pointer !important;
-      border: none !important;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
-    
-    .docsify-copy-code-button span {
-        color: #fff !important;
-    }
-
-    /* 4. SEARCH BAR */
-    .search input {
-      border: 1px solid #ddd !important;
-      margin-top: 10px;
+      z-index: 10;
     }
   </style>
 </head>
 <body>
   <div id="app">Loading...</div>
-
   <script>
     window.$docsify = {
       name: 'PowerShell Notes',
@@ -71,30 +39,19 @@
       subMaxLevel: 2,
       search: 'auto',
       copyCode: {
-        buttonText: 'Copy',
+        buttonText : 'Copy',
         successText: 'Copied'
       }
     }
   </script>
 
-  <!-- Core Scripts -->
+  <!-- Essential Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   
-  <!-- Copy Plugin - Keep this specific version -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+  <!-- This is the copy plugin script that makes the icon appear -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
-
-  <!-- Attribute Cleanup -->
-  <script>
-    window.$docsify.plugins = [].concat(function(hook) {
-      hook.doneEach(function() {
-        document.querySelectorAll('pre').forEach(function(el) {
-          el.removeAttribute('data-lang');
-        });
-      });
-    }, window.$docsify.plugins);
-  </script>
 </body>
 </html>
