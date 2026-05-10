@@ -5,82 +5,82 @@
   <title>PowerShell Notes</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
-    /* 1. HIDE THE WATERMARK */
-    pre[data-lang]::before {
-      content: none !important;
-      display: none !important;
+    /* 1. REMOVE WATERMARK & REDUCE SPACE */
+    /* Target the exact selector Docsify uses for the 'powershell' label */
+    .markdown-section pre[data-lang]::before {
+      content: none !important; /* Kills the text */
+      display: none !important; /* Removes the element */
     }
 
-    /* 2. REMOVE EXTRA TOP SPACE IN CODE BOX */
+    /* Remove the extra padding at the top of code boxes */
     .markdown-section pre {
-      padding-top: 10px !important; /* Reduced from 2.5em to 10px */
+      padding: 1.2em !important; /* Standard even padding */
+      margin: 1.2em 0 !important;
       position: relative;
     }
 
-    /* 3. SEARCH BAR STYLING - Ensure it's visible at the top */
-    .search {
-      margin-bottom: 20px;
-      padding: 6px;
-      border-bottom: 1px solid #eee;
-    }
-
-    /* 4. COPY BUTTON - Make it sleek and non-obtrusive */
+    /* 2. STYLE THE COPY BUTTON */
     .docsify-copy-code-button {
       background: #42b983 !important;
       color: white !important;
-      border-radius: 3px !important;
-      font-size: 11px !important;
+      border: none !important;
+      border-radius: 4px !important;
       padding: 4px 8px !important;
+      font-weight: bold !important;
+      opacity: 1 !important; /* Make it always visible */
+    }
+
+    /* 3. FIX SEARCH BAR VISIBILITY */
+    .search input {
+      background-color: #f3f3f3 !important;
+      border-radius: 5px !important;
     }
   </style>
 </head>
 <body>
   <div id="app">Loading...</div>
-  
   <script>
     window.$docsify = {
       name: 'PowerShell Notes',
       loadSidebar: true,
       subMaxLevel: 2,
-      homepage: 'README.md',
-      // SEARCH PLUGIN CONFIGURATION
+      // Search Plugin Config
       search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Search notes...',
+        placeholder: 'Search...',
         noData: 'No results!',
         depth: 6
       },
+      // Copy Code Config
       copyCode: {
-        buttonText : 'Copy',
+        buttonText: 'Copy',
         successText: 'Copied'
       }
     }
   </script>
 
-  <!-- Docsify Core -->
+  <!-- Essential Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
   
-  <!-- Search Plugin (Must be AFTER docsify core) -->
+  <!-- Search Plugin (Must be after docsify.js) -->
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   
-  <!-- Copy Code Plugin -->
+  <!-- Copy Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   
-  <!-- Syntax Highlighting -->
+  <!-- Language Support -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
 
-  <!-- JavaScript to strip watermarks -->
+  <!-- Final Watermark Purge -->
   <script>
-    if (window.$docsify) {
-      window.$docsify.plugins = [].concat(function(hook) {
-        hook.doneEach(function() {
-          document.querySelectorAll('pre').forEach(function(el) {
-            el.setAttribute('data-lang', '');
-          });
+    // This script runs every time a page is loaded to manually strip the lang attribute
+    window.$docsify.plugins = [].concat(function(hook) {
+      hook.doneEach(function() {
+        var codes = document.querySelectorAll('pre');
+        codes.forEach(function(code) {
+          code.setAttribute('data-lang', ''); // Effectively deletes the watermark source
         });
-      }, window.$docsify.plugins);
-    }
+      });
+    }, window.$docsify.plugins);
   </script>
 </body>
 </html>
