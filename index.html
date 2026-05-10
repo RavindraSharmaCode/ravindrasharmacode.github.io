@@ -6,40 +6,42 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   
   <style>
-    /* 1. THE WATERMARK KILLER */
-    /* This targets the exact attribute Docsify uses to display 'powershell' */
-    section.content pre[data-lang]::before {
-      content: "" !important;
+    /* THE BRUTE FORCE WATERMARK KILLER */
+    /* This targets every possible way that 'powershell' text is injected */
+    pre[data-lang]::before, 
+    pre[data-lang]::after,
+    .markdown-section pre::before,
+    .markdown-section pre::after,
+    code[class*="language-"]::before,
+    code[class*="language-"]::after {
       display: none !important;
+      content: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
     }
 
-    /* 2. BUTTON STYLING */
+    /* Keep the Copy Button visible and pretty */
     .docsify-copy-code-button {
-      opacity: 1 !important; /* Always visible */
-      background: #42b983 !important; /* Nice green to match Vue theme */
-      color: white !important;
-      border: none !important;
+      opacity: 1 !important;
+      background: #42b983 !important;
+      color: #fff !important;
       border-radius: 4px !important;
-      padding: 6px 10px !important;
-      font-weight: bold !important;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 5px 10px !important;
     }
 
-    /* 3. LAYOUT FIX */
     .markdown-section pre {
-      padding-top: 2.5em !important; /* Space for the button */
+        padding-top: 2.5em !important;
     }
   </style>
 </head>
 <body>
-  <div id="app">Please wait, loading notes...</div>
+  <div id="app">Loading...</div>
   <script>
     window.$docsify = {
       name: 'PowerShell Notes',
       loadSidebar: true,
       subMaxLevel: 2,
-      // Search Plugin Settings
-      search: 'auto', 
+      homepage: 'README.md',
       copyCode: {
         buttonText : 'Copy',
         successText: 'Copied'
@@ -47,14 +49,20 @@
     }
   </script>
   
-  <!-- Required Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
-  
-  <!-- Plugins -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  
-  <!-- Syntax Highlighting -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
+
+  <!-- JavaScript Fallback to remove watermark if CSS fails -->
+  <script>
+    document.addEventListener('click', function() {
+        // Every time you click (navigate), we strip the labels
+        setTimeout(() => {
+            document.querySelectorAll('pre').forEach(pre => {
+                pre.setAttribute('data-lang', '');
+            });
+        }, 500);
+    });
+  </script>
 </body>
 </html>
