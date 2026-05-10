@@ -2,17 +2,21 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <title>PowerShell Notes</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">Please wait, loading notes...</div>
   <script>
     window.$docsify = {
       name: 'PowerShell Notes',
       loadSidebar: true,
       subMaxLevel: 2,
-      // This ensures README.md is the first thing people see
-      homepage: 'README.md' 
+      // FIX 1: Explicitly tell Docsify to use README.md as the home
+      homepage: 'README.md', 
+      // FIX 2: Ensure it looks in the correct folder on GitHub
+      basePath: './',
+      relativePath: true
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
