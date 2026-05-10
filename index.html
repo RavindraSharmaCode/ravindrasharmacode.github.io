@@ -3,55 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>PowerShell Notes</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  
-  <!-- Theme -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 
   <style>
-    /* 1. REMOVE WATERMARK & GHOST SPACE */
-    /* This targets the 'powershell' label directly and kills it */
+    /* 1. KILL WATERMARK & EXTRA SPACE */
     .markdown-section pre[data-lang]::before {
-      content: none !important;
       display: none !important;
+      content: none !important;
     }
 
-    /* 2. CLEAN CODE BOX (No extra top space) */
+    /* 2. CODE BOX BOX STYLING */
     .markdown-section pre {
       padding: 0 !important;
       margin: 1.2em 0 !important;
-      position: relative !important; /* Required for Copy Button positioning */
+      position: relative !important;
       background-color: #f8f8f8 !important;
+      border: 1px solid #eee;
       border-radius: 4px;
-      overflow: visible !important;
+      overflow: visible !important; /* Crucial so button isn't hidden */
     }
 
     .markdown-section pre > code {
       padding: 15px !important;
+      padding-top: 20px !important; /* Give the button a little breathing room */
       display: block !important;
       line-height: 1.5;
-      color: #333;
     }
 
-    /* 3. FORCE COPY ICON VISIBILITY */
+    /* 3. THE COPY BUTTON - FORCED STYLE */
+    /* We target the button class directly with extreme priority */
     .docsify-copy-code-button {
-      opacity: 1 !important; /* Always visible */
-      background: #42b983 !important; /* Matching Vue Green */
-      color: #ffffff !important;
-      border-radius: 0 4px 0 4px !important; /* Top-right curve */
-      padding: 5px 10px !important;
-      font-size: 12px !important;
-      font-weight: bold !important;
-      z-index: 10 !important;
+      position: absolute !important;
+      top: 4px !important;
+      right: 4px !important;
+      display: block !important;
+      opacity: 1 !important; /* Force visibility */
+      background: #42b983 !important;
+      color: #fff !important;
+      padding: 4px 10px !important;
+      border-radius: 3px !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      z-index: 999 !important;
+      cursor: pointer !important;
+      border: none !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    
+    .docsify-copy-code-button span {
+        color: #fff !important;
     }
 
-    /* 4. SEARCH BAR STYLING */
+    /* 4. SEARCH BAR */
     .search input {
-      background: #f3f3f3 !important;
       border: 1px solid #ddd !important;
-      border-radius: 4px !important;
-      padding: 8px !important;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -61,21 +67,9 @@
   <script>
     window.$docsify = {
       name: 'PowerShell Notes',
-      repo: '',
       loadSidebar: true,
       subMaxLevel: 2,
-      homepage: 'README.md',
-      
-      // Search Configuration
-      search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Search notes...',
-        noData: 'No results found',
-        depth: 6
-      },
-
-      // Copy Code Configuration
+      search: 'auto',
       copyCode: {
         buttonText: 'Copy',
         successText: 'Copied'
@@ -83,17 +77,16 @@
     }
   </script>
 
-  <!-- Docsify v4 -->
+  <!-- Core Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
-  
-  <!-- Plugins (Order is important) -->
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   
-  <!-- Language Highlighting -->
+  <!-- Copy Plugin - Keep this specific version -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
 
-  <!-- Cleanup Script: Removes data-lang attribute to ensure watermark never appears -->
+  <!-- Attribute Cleanup -->
   <script>
     window.$docsify.plugins = [].concat(function(hook) {
       hook.doneEach(function() {
