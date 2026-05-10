@@ -1,4 +1,4 @@
 * [Home](README.md)
 * [Active Directory](ad_notes.md)
-* [Azure Module](azure.md)
-* [Scripts](scripts.md)
+* [Azure Scripts](azure.md)
+* [Exchange](exchange.md)
