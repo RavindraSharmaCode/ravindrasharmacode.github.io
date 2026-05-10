@@ -1,75 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>PowerShell Notes</title>
-  <!-- Using the standard theme -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   
+  <!-- Theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+
   <style>
-    /* 1. THE WATERMARK KILLER */
-    /* This targets the 'powershell' text and shrinks its container to zero */
-    pre[data-lang]::before {
+    /* 1. REMOVE WATERMARK & GHOST SPACE */
+    /* This targets the 'powershell' label directly and kills it */
+    .markdown-section pre[data-lang]::before {
       content: none !important;
       display: none !important;
-      height: 0 !important;
-      padding: 0 !important;
-      margin: 0 !important;
     }
 
-    /* 2. FIX THE GAPS */
+    /* 2. CLEAN CODE BOX (No extra top space) */
     .markdown-section pre {
       padding: 0 !important;
       margin: 1.2em 0 !important;
+      position: relative !important; /* Required for Copy Button positioning */
+      background-color: #f8f8f8 !important;
+      border-radius: 4px;
+      overflow: visible !important;
     }
 
-    /* This creates the clean, even space inside the box */
     .markdown-section pre > code {
-      padding: 15px !important; 
+      padding: 15px !important;
       display: block !important;
-      position: relative;
+      line-height: 1.5;
+      color: #333;
     }
 
-    /* 3. SEARCH BAR VISIBILITY */
-    /* Forces the search input to have a border so you can see it */
-    .search input {
-      border: 1px solid #ddd !important;
-      margin: 10px 0;
-    }
-
-    /* 4. COPY BUTTON POSITION */
+    /* 3. FORCE COPY ICON VISIBILITY */
     .docsify-copy-code-button {
-      background: #42b983 !important;
-      color: white !important;
+      opacity: 1 !important; /* Always visible */
+      background: #42b983 !important; /* Matching Vue Green */
+      color: #ffffff !important;
+      border-radius: 0 4px 0 4px !important; /* Top-right curve */
+      padding: 5px 10px !important;
+      font-size: 12px !important;
+      font-weight: bold !important;
+      z-index: 10 !important;
+    }
+
+    /* 4. SEARCH BAR STYLING */
+    .search input {
+      background: #f3f3f3 !important;
+      border: 1px solid #ddd !important;
       border-radius: 4px !important;
-      padding: 4px 8px !important;
+      padding: 8px !important;
     }
   </style>
 </head>
 <body>
   <div id="app">Loading...</div>
+
   <script>
     window.$docsify = {
       name: 'PowerShell Notes',
+      repo: '',
       loadSidebar: true,
       subMaxLevel: 2,
-      // Fixed Search Config
+      homepage: 'README.md',
+      
+      // Search Configuration
       search: {
+        maxAge: 86400000,
+        paths: 'auto',
         placeholder: 'Search notes...',
-        noData: 'No results',
+        noData: 'No results found',
         depth: 6
       },
+
+      // Copy Code Configuration
       copyCode: {
-        buttonText : 'Copy',
+        buttonText: 'Copy',
         successText: 'Copied'
       }
     }
   </script>
 
-  <!-- Script order is critical for the Search Bar to show up -->
+  <!-- Docsify v4 -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- Plugins (Order is important) -->
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  
+  <!-- Language Highlighting -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
+
+  <!-- Cleanup Script: Removes data-lang attribute to ensure watermark never appears -->
+  <script>
+    window.$docsify.plugins = [].concat(function(hook) {
+      hook.doneEach(function() {
+        document.querySelectorAll('pre').forEach(function(el) {
+          el.removeAttribute('data-lang');
+        });
+      });
+    }, window.$docsify.plugins);
+  </script>
 </body>
 </html>
