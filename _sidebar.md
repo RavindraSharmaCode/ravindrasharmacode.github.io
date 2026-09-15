@@ -7,3 +7,21 @@
 * **Entra ID**
   * [Identity Protection](EntraID/identity.md)
   * [Conditional Access](EntraID/conditional-access.md)
+
+* **Domain Contoller**
+  * [DCDIAG]
+  * [Get Server Info]
+  * [Patching]
+
+* **Entra Connect**
+  * [CmdLet](ActiveDirectory/Get_ADUsers.md)
+  * [Other Command](ActiveDirectory/gpo.md)
+ 
+ * **DNS**
+  * [Identity Protection](EntraID/identity.md)
+  * [Conditional Access](EntraID/conditional-access.md)
+
+* **DHCP**
+  * [DCDIAG]
+  * [Get Server Info]
+  * [Patching]
