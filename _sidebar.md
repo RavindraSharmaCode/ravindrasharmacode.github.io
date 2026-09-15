@@ -7,6 +7,7 @@
 * **Entra ID**
   * [Identity Protection](EntraID/identity.md)
   * [Conditional Access](EntraID/conditional-access.md)
+  * [Graph](Entra/graph.md)
 
 * **Domain Contoller**
   * [DCDIAG]
